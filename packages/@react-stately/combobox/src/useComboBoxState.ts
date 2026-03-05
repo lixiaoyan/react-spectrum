@@ -373,7 +373,7 @@ export function useComboBoxState<T extends object, M extends SelectionMode = 'si
     // If multiple things are controlled, call onSelectionChange
     if (value !== undefined && props.inputValue !== undefined) {
       props.onSelectionChange?.(selectedKey);
-      props.onChange?.(displayValue);
+      props.onChange?.(displayValue as any);
 
       // Stop menu from reopening from useEffect
       let itemText = selectedKey != null ? collection.getItem(selectedKey)?.textValue ?? '' : '';
@@ -504,7 +504,7 @@ function getDefaultInputValue(defaultInputValue: string | null | undefined, sele
   return defaultInputValue;
 }
 
-function convertValue(value: Key | Key[] | null | undefined) {
+function convertValue(value: Key | readonly Key[] | null | undefined) {
   if (value === undefined) {
     return undefined;
   }
